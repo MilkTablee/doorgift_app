@@ -11,20 +11,25 @@
         >
             <div class="ms-3">
                 <div class="text-sm font-medium text-gray-950 dark:text-white">
-                    {{ strtoupper($locale) }}
+                    <x-filament::icon 
+                        :icon="$currentLocaleIcon ?? 'heroicons-o-language'"
+                        class="h-5 w-5"
+                    />
                 </div>
             </div>
         </button>
     </x-slot>
 
     <x-filament::dropdown.list>
-        @foreach ($locales as $key => $label)
+        @foreach ($locales as $key => $data)
             <x-filament::dropdown.list.item
                 :href="route('language-switcher.switch', ['locale' => $key])"
                 tag="a"
-                :active="$locale === $key"
+                :class="($locale === $key) ? 'fi-selected' : ''"
+                :icon="$data['icon']"
+                icon-position="after"
             >
-                {{ $label }}
+                {{ $data['label'] }}
             </x-filament::dropdown.list.item>
         @endforeach
     </x-filament::dropdown.list>

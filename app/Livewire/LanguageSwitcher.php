@@ -18,8 +18,8 @@ class LanguageSwitcher extends Component
     public function mount(): void
     {
         $this->locales = [
-            'en' => 'English',
-            'ms' => 'Bahasa Malaysia',
+            'en' => ['label' => 'English', 'icon' => 'flag-country-gb'],
+            'ms' => ['label' => 'Bahasa Malaysia', 'icon' => 'flag-country-my'],
         ];
         $this->locale = session('locale', config('app.locale'));
     }
@@ -33,6 +33,7 @@ class LanguageSwitcher extends Component
         return view('components.language-switcher', [
             'locales' => $this->locales,
             'locale' => $this->locale,
+            'currentLocaleIcon' => $this->locales[$this->locale]['icon'] ?? null,
             'attributes' => $attributes,
         ]);
     }
