@@ -4,6 +4,8 @@ namespace App\Providers\Filament;
 
 use App\Http\Middleware\SetLocale;
 use App\Livewire\LanguageSwitcher;
+use Filament\Support\Facades\FilamentView;
+use Filament\View\PanelsRenderHook;
 use Filament\Http\Middleware\Authenticate;
 use Filament\Http\Middleware\AuthenticateSession;
 use Filament\Http\Middleware\DisableBladeIconComponents;
@@ -21,6 +23,7 @@ use Illuminate\Routing\Middleware\SubstituteBindings;
 use Illuminate\Session\Middleware\StartSession;
 use Illuminate\View\Middleware\ShareErrorsFromSession;
 use Illuminate\Support\Facades\Blade;
+use Illuminate\Support\Facades\Vite;
 
 class AdminPanelProvider extends PanelProvider
 {
@@ -35,7 +38,7 @@ class AdminPanelProvider extends PanelProvider
                 'primary' => Color::Amber,
             ])
             ->assets([
-                Css::make('custom-stylesheet', resource_path('css/filament/admin/theme.css')),
+                Css::make('custom-stylesheet', Vite::asset('resources/css/filament/admin/theme.css')),
             ])
             ->discoverResources(in: app_path('Filament/Resources'), for: 'App\\Filament\\Resources')
             ->discoverPages(in: app_path('Filament/Pages'), for: 'App\\Filament\\Pages')
@@ -61,10 +64,8 @@ class AdminPanelProvider extends PanelProvider
             ])
             ->authMiddleware([
                 Authenticate::class,
-            ])
-            ->renderHook(
-                'panels::topbar.end',
-                fn () => Blade::render('@livewire(\'language-switcher\')'),
-            );
+            ]);
+
+
     }
 }

@@ -3,9 +3,14 @@
 namespace App\Livewire;
 
 use Livewire\Component;
+use Filament\Support\Concerns\HasExtraAttributes;
+use Illuminate\View\View;
+use Illuminate\View\ComponentAttributeBag;
 
 class LanguageSwitcher extends Component
 {
+    use HasExtraAttributes;
+
     public array $locales;
 
     public string $locale;
@@ -19,17 +24,16 @@ class LanguageSwitcher extends Component
         $this->locale = session('locale', config('app.locale'));
     }
 
-    public function switchLocale(string $locale): void
+    public function render(): View
     {
-        if (array_key_exists($locale, $this->locales)) {
-            session()->put('locale', $locale);
+        $attributes = $this->extraAttributes instanceof ComponentAttributeBag
+            ? $this->extraAttributes
+            : (new ComponentAttributeBag((array) $this->extraAttributes));
 
-            $this->redirect(request()->header('Referer'));
-        }
-    }
-
-    public function render()
-    {
-        return view('livewire.language-switcher');
+        return view('components.language-switcher', [
+            'locales' => $this->locales,
+            'locale' => $this->locale,
+            'attributes' => $attributes,
+        ]);
     }
 }
