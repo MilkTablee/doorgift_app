@@ -9,5 +9,35 @@
 }
 
 html.dark .fi-ta-row.hidden-product .fi-ta-cell {
+
     background-color: #232326;
+
 }
+
+
+
+.custom-language-switcher-icon {
+
+
+
+    @apply h-5 w-5;
+
+
+
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

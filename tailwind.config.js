@@ -7,6 +7,9 @@ export default {
         './resources/views/filament/**/*.blade.php',
         './vendor/filament/**/*.blade.php',
         './resources/css/filament/admin/theme.css',
+        './resources/views/**/*.blade.php',
+        './app/Livewire/**/*.php',
+        './resources/views/components/language-switcher.blade.php',
     ],
     theme: {
         extend: {},

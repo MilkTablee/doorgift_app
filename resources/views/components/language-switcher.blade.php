@@ -13,7 +13,7 @@
                 <div class="text-sm font-medium text-gray-950 dark:text-white">
                     <x-filament::icon 
                         :icon="$currentLocaleIcon ?? 'heroicons-o-language'"
-                        class="h-5 w-5"
+                        class="custom-language-switcher-icon"
                     />
                 </div>
             </div>
