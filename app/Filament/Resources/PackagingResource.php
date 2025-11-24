@@ -2,8 +2,8 @@
 
 namespace App\Filament\Resources;
 
-use App\Filament\Resources\ProductResource\Pages;
-use App\Models\Product;
+use App\Filament\Resources\PackagingResource\Pages;
+use App\Models\Packaging;
 use Filament\Forms\Components\TextInput;
 use Filament\Forms\Components;
 use Filament\Tables\Columns\IconColumn;
@@ -22,13 +22,13 @@ use UnitEnum;
 use BackedEnum;
 
 
-class ProductResource extends Resource
+class PackagingResource extends Resource
 {
-    protected static ?string $model = Product::class;
+    protected static ?string $model = Packaging::class;
 
     protected static UnitEnum|string|null $navigationGroup = 'Product Management';
 
-    protected static BackedEnum|string|null $navigationIcon = 'heroicon-o-rectangle-stack';
+    protected static BackedEnum|string|null $navigationIcon = 'heroicon-o-archive-box';
 
 
     public static function form(Schema $schema): Schema
@@ -136,7 +136,7 @@ class ProductResource extends Resource
                     DeleteBulkAction::make(),
                 ]),
             ])
-            ->recordClasses(fn (Product $record): ?string => match ($record->is_visible) {
+            ->recordClasses(fn (Packaging $record): ?string => match ($record->is_visible) {
                 false => 'hidden-product',
                 default => null,
             });
@@ -152,9 +152,9 @@ class ProductResource extends Resource
     public static function getPages(): array
     {
         return [
-            'index' => Pages\ListProducts::route('/'),
-            'create' => Pages\CreateProduct::route('/create'),
-            'edit' => Pages\EditProduct::route('/{record}/edit'),
+            'index' => Pages\ListPackagings::route('/'),
+            'create' => Pages\CreatePackaging::route('/create'),
+            'edit' => Pages\EditPackaging::route('/{record}/edit'),
         ];
     }
 }
