@@ -1,8 +1,8 @@
 <?php
 
-use Illuminate\Support\Facades\Route;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\App;
+use Illuminate\Support\Facades\Route;
 
 /*
 |--------------------------------------------------------------------------
@@ -22,5 +22,6 @@ Route::get('/', function () {
 Route::get('/language/{locale}', function (Request $request, $locale) {
     session()->put('locale', $locale);
     App::setLocale($locale);
+
     return redirect()->back();
 })->name('language-switcher.switch');

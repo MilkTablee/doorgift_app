@@ -4,23 +4,21 @@ namespace App\Filament\Resources;
 
 use App\Filament\Resources\ProductResource\Pages;
 use App\Models\Product;
-use Filament\Forms\Components\TextInput;
+use BackedEnum;
+use Filament\Actions\BulkActionGroup;
+use Filament\Actions\DeleteBulkAction;
+use Filament\Actions\EditAction;
 use Filament\Forms\Components;
+use Filament\Forms\Components\TextInput;
+use Filament\Resources\Resource;
+use Filament\Schemas\Schema;
 use Filament\Tables\Columns\IconColumn;
 use Filament\Tables\Columns\TextColumn;
 use Filament\Tables\Filters\Filter;
 use Filament\Tables\Filters\TernaryFilter;
 use Filament\Tables\Table;
-use Filament\Actions\BulkActionGroup;
-use Filament\Actions\DeleteBulkAction;
-use Filament\Actions\EditAction;
-use Filament\Resources\Resource;
 use Illuminate\Database\Eloquent\Builder;
-use Filament\Schemas\Schema;
-use Illuminate\Database\Eloquent\SoftDeletingScope;
 use UnitEnum;
-use BackedEnum;
-
 
 class ProductResource extends Resource
 {
@@ -29,7 +27,6 @@ class ProductResource extends Resource
     protected static UnitEnum|string|null $navigationGroup = 'Product Management';
 
     protected static BackedEnum|string|null $navigationIcon = 'heroicon-o-rectangle-stack';
-
 
     public static function form(Schema $schema): Schema
     {
@@ -90,7 +87,7 @@ class ProductResource extends Resource
                     ->boolean()
                     ->trueLabel(__('Visible'))
                     ->falseLabel(__('Hidden')),
-                
+
                 Filter::make('price_range')
                     ->label(__('Julat Harga'))
                     ->form([
@@ -115,7 +112,7 @@ class ProductResource extends Resource
                             return null;
                         }
 
-                        return __('Julat Harga') . ': ' . ($data['price_from'] ?? '0') . ' - ' . ($data['price_to'] ?? '...');
+                        return __('Julat Harga').': '.($data['price_from'] ?? '0').' - '.($data['price_to'] ?? '...');
                     }),
                 Filter::make('price_exact')
                     ->form([
@@ -123,7 +120,7 @@ class ProductResource extends Resource
                             ->label(__('Harga Tepat'))
                             ->numeric()
                             ->inputMode('decimal')
-                            ->prefix('MYR')
+                            ->prefix('MYR'),
                     ])
                     ->query(fn (Builder $query, array $data): Builder => $query->when($data['price'], fn (Builder $query, $price): Builder => $query->where('price', $price)))
                     ->label(__('Harga Tepat')),

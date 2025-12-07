@@ -19,6 +19,6 @@ class FilamentHookServiceProvider extends ServiceProvider
         FilamentView::registerRenderHook(
             PanelsRenderHook::USER_MENU_BEFORE,
             fn (): string => Blade::render('@livewire(\'language-switcher\')'),
-        );    
+        );
     }
 }

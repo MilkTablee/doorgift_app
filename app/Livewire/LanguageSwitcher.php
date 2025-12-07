@@ -2,10 +2,10 @@
 
 namespace App\Livewire;
 
-use Livewire\Component;
 use Filament\Support\Concerns\HasExtraAttributes;
-use Illuminate\View\View;
 use Illuminate\View\ComponentAttributeBag;
+use Illuminate\View\View;
+use Livewire\Component;
 
 class LanguageSwitcher extends Component
 {
