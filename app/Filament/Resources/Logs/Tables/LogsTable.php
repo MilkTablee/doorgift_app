@@ -1,28 +1,28 @@
 <?php
 
-namespace App\Filament\Resources\Customers\Tables;
+namespace App\Filament\Resources\Logs\Tables;
 
-use Filament\Actions\BulkActionGroup;
-use Filament\Actions\DeleteBulkAction;
-use Filament\Actions\EditAction;
 use Filament\Tables\Columns\TextColumn;
 use Filament\Tables\Table;
 
-class CustomersTable
+class LogsTable
 {
     public static function configure(Table $table): Table
     {
         return $table
             ->columns([
-                TextColumn::make('name')
+                TextColumn::make('user.name')
+                    ->searchable(),
+                TextColumn::make('action')
+                    ->searchable(),
+                TextColumn::make('table_name')
+                    ->label('Table')
                     ->searchable(),
                 TextColumn::make('display_id')
-                    ->label('ID'),
-                TextColumn::make('phone')
+                    ->label('ID')
                     ->searchable(),
-                TextColumn::make('address')
-                    ->searchable()
-                    ->toggleable(isToggledHiddenByDefault: true),
+                TextColumn::make('ip_address')
+                    ->searchable(),
                 TextColumn::make('created_at')
                     ->dateTime()
                     ->sortable()
@@ -34,14 +34,6 @@ class CustomersTable
             ])
             ->filters([
                 //
-            ])
-            ->recordActions([
-                EditAction::make(),
-            ])
-            ->toolbarActions([
-                BulkActionGroup::make([
-                    DeleteBulkAction::make(),
-                ]),
             ]);
     }
 }

@@ -59,6 +59,8 @@ class PackagingResource extends Resource
                 TextColumn::make('name')
                     ->label(__('Nama'))
                     ->searchable(),
+                TextColumn::make('display_id')
+                    ->label('ID'),
                 TextColumn::make('price')
                     ->label(__('Harga'))
                     ->money('MYR')

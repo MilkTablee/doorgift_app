@@ -18,6 +18,13 @@ class OrdersTable
                 TextColumn::make('customer.name')
                     ->searchable()
                     ->sortable(),
+                TextColumn::make('display_id')
+                    ->label('ID'),
+                TextColumn::make('products.name')
+                    ->label('Products')
+                    ->listWithLineBreaks()
+                    ->limitList(2)
+                    ->expandableLimitedList(),
                 TextColumn::make('status')
                     ->badge()
                     ->color(fn (string $state): string => match ($state) {
