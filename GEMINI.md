@@ -43,6 +43,15 @@ To start the development server, user has to run:
 npm run dev
 ```
 
+To start Laravel Reverb server, user has to run:
+
+```bash
+./vendor/bin/sail artisan reverb:start
+
+npm run dev
+```
+
+
 ### Testing
 
 To run the test suite, use:

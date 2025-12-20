@@ -9,6 +9,7 @@
         "php": "^8.2",
         "filament/filament": "^4.0",
         "laravel/framework": "^11.0",
+        "laravel/reverb": "^1.6",
         "laravel/tinker": "^2.10.1",
         "outhebox/blade-flags": "^1.5"
     },
