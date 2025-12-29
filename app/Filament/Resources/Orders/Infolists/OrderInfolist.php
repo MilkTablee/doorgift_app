@@ -41,13 +41,16 @@ class OrderInfolist
                                 Select::make('product_id')
                                     ->relationship('product', 'name')
                                     ->disabled(),
+                                Select::make('packaging_id')
+                                    ->relationship('packaging', 'name')
+                                    ->disabled(),
                                 TextInput::make('quantity')
                                     ->disabled(),
                                 TextInput::make('price')
                                     ->money('MYR')
                                     ->disabled(),
                             ])
-                            ->columns(3)
+                            ->columns(4)
                             ->disabled(),
                     ]),
                 Section::make()

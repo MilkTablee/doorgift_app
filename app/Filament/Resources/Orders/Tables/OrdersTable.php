@@ -25,6 +25,11 @@ class OrdersTable
                     ->listWithLineBreaks()
                     ->limitList(2)
                     ->expandableLimitedList(),
+                TextColumn::make('orderProducts.packaging.name')
+                    ->label('Packaging')
+                    ->listWithLineBreaks()
+                    ->limitList(2)
+                    ->expandableLimitedList(),
                 TextColumn::make('status')
                     ->badge()
                     ->color(fn (string $state): string => match ($state) {

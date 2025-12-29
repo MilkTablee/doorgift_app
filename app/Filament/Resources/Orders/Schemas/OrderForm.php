@@ -2,6 +2,7 @@
 
 namespace App\Filament\Resources\Orders\Schemas;
 
+use App\Models\Packaging;
 use App\Models\Product;
 use Filament\Forms\Components\Repeater;
 use Filament\Forms\Components\Select;
@@ -45,6 +46,14 @@ class OrderForm
                             ->reactive()
                             ->afterStateUpdated(fn ($state, Set $set, $livewire) => $set('price', Product::find($state)?->price ?? 0)),
 
+                        Select::make('packaging_id')
+                            ->label('Packaging')
+                            ->options(Packaging::query()->pluck('name', 'id'))
+                            ->reactive()
+                            ->afterStateUpdated(function ($state, Set $set) {
+                                $set('packaging_price', Packaging::find($state)?->price ?? 0);
+                            }),
+
                         TextInput::make('quantity')
                             ->numeric()
                             ->default(1)
@@ -71,9 +80,10 @@ class OrderForm
     {
         $total = 0;
 
-        if ($products = $get('products')) {
+        if ($products = $get('orderProducts')) {
             foreach ($products as $product) {
-                $total += $product['price'] * $product['quantity'];
+                $packagingPrice = Packaging::find($product['packaging_id'])?->price ?? 0;
+                $total += ($product['price'] * $product['quantity']) + ($packagingPrice * $product['quantity']);
             }
         }
 
